@@ -31,7 +31,7 @@
         aria-label="Sidebar">
         <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
             <a href="{{ route('dashboard') }}" class="flex items-center ps-2.5 mb-5">
-                <img src="{{ asset('assets/logo.png') }}" class="h-10 me-3 sm:h-7" alt="Flowbite Logo" />
+                <img src="{{ asset('assets/logo.png') }}" class="h-16" alt="Flowbite Logo" />
             </a>
             <ul class="space-y-2 font-medium">
                 <li>
