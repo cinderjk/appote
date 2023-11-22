@@ -7,6 +7,7 @@ use App\Livewire\Login;
 use App\Livewire\Dashboard;
 use App\Livewire\Transaction;
 use App\Livewire\Product;
+use App\Livewire\CreateProduct;
 use App\Livewire\Customer;
 use App\Livewire\Report;
 
@@ -17,6 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('transaction', Transaction::class)->name('transaction');
     Route::get('product', Product::class)->name('product');
+    Route::get('product/create', CreateProduct::class)->name('product.create');
     Route::get('customer', Customer::class)->name('customer');
     Route::get('report', Report::class)->name('report');
     

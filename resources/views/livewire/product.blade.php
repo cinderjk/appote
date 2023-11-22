@@ -20,14 +20,26 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 9 4-4-4-4" />
                     </svg>
-                    <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Transaksi</span>
+                    <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
+                        {{ $title }}
+                    </span>
                 </div>
             </li>
         </ol>
     </nav>
-    <h2 class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-700 md:text-4xl dark:text-white">
-        {{ $title }}
-    </h2>
+    <div class="flex justify-between">
+
+        <h2 class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-700 md:text-4xl dark:text-white">
+            {{ $title }}
+        </h2>
+
+        <a href="{{ route('product.create')  }}"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mb-4">
+            Buat Produk
+        </a>
+
+
+    </div>
 
     <div class="border-2 border-gray-200 rounded-lg dark:border-gray-700">
 
@@ -77,6 +89,7 @@
                         </td>
                         <td class="px-6 py-4 text-right">
                             <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            <a href="#" class="font-medium ms-2 text-red-600 dark:text-red-500 hover:underline">Hapus</a>
                         </td>
                     </tr>
                     @endforeach
