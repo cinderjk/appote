@@ -63,10 +63,7 @@
                             selected: this.value === value
                         })))
                     }
-
                     refreshChoices()
-
-                    
 
                     this.$refs.select.addEventListener('change', () => {
                         this.value = choices.getValue(true)
