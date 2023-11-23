@@ -7,7 +7,8 @@
     <meta content="{{ config('app.name') }}" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-d595991b.css') }}"> --}}
     @livewireStyles
     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
@@ -122,7 +123,8 @@
 
     </div>
 
-
+    {{-- <script src="{{ asset('build/assets/app-4a3c839c.js') }}"></script> --}}
+    {{-- @livewireScripts --}}
     @livewireScriptConfig
 </body>
 

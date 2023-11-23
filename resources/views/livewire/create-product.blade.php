@@ -42,15 +42,14 @@
     <h2 class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-700 md:text-4xl dark:text-white">
         {{ $title }}
     </h2>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
     <div class=" rounded-lg dark:border-gray-700">
         <div class="h-48 rounded bg-gray-50 dark:bg-gray-800">
             <div x-data="{
                 value: 1,
                 options : [
-                    { value: 1, label: 'Foo' },
-                    { value: 2, label: 'Bar' },
-                    { value: 3, label: 'Baz' },
+                    @foreach ($brands as $item )
+                    { value: {{ $item->id }}, label: '{{ $item->name }}' },
+                    @endforeach
                 ],
                 init() {
                     let choices = new Choices(this.$refs.select)
@@ -77,8 +76,9 @@
                 <select x-ref="select"></select>
 
                 <div>Selected : <span x-text="JSON.stringify(value)"></span> </div>
-                <button @click="value = 3">Change to Baz</button>
-                <button @click="options.push({value: 4, label: 'Bob'})">Add Bob</button>
+                <div>Options : <span x-text="JSON.stringify(options)"></span> </div>
+                <button @click="value = 3">Change to value 3</button>
+                <button @click="options.push({value: 11, label: 'Bob'})">Add Bob</button>
 
             </div>
         </div>

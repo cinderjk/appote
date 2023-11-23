@@ -1,9 +1,10 @@
 <div>
     <div
-        class="w-full px-24 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-        <form wire:submit="login" class="space-y-5" action="#">
+        class="w-full p-12 lg:px-16 bg-white border border-gray-200 rounded-lg shadow  md:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <form wire:submit="login" class="space-y-5">
             <img src="{{ asset('assets/logo.png') }}" alt="logo-{{ config('app.name') }}" class="h-16 m-auto">
-            <h5 class="text-xl font-medium text-gray-900 dark:text-white px-32">Masuk ke {{ config('app.name') }}</h5>
+            <h5 class="text-xl font-medium text-gray-900 dark:text-white lg:px-32">Masuk ke {{ config('app.name') }}
+            </h5>
             <div>
                 <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     Username
