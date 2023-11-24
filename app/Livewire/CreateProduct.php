@@ -10,7 +10,7 @@ use App\Models\Category;
 class CreateProduct extends Component
 {
     public $title = 'Buat Produk';
-    public $brand_id;
+    public $brand_id = 1;
     public $category_id;
     public $name;
     public $slug;

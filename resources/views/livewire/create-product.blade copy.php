@@ -43,8 +43,8 @@
         {{ $title }}
     </h2>
     <div class=" rounded-lg dark:border-gray-700">
-        {{-- Brand --}}
-        <div class="mb-3" x-data="{
+        <div class="h-48 rounded bg-gray-50 dark:bg-gray-800">
+            <div x-data="{
                 value: 1,
                 options : [
                     @foreach ($brands as $item )
@@ -72,47 +72,16 @@
                     this.$watch('options', () => refreshChoices())
                 }
             }">
-            <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Merek</label>
+                <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>
 
-            <select x-ref="select" id="brand"></select>
+                <select x-ref="select" id="brand"></select>
+
+                <div>Selected : <span x-text="JSON.stringify(value)"></span> </div>
+                <div>Options : <span x-text="JSON.stringify(options)"></span> </div>
+                <button @click="value = 3">Change to value 3</button>
+                <button @click="options.push({value: 11, label: 'Bob'})">Add Bob</button>
+
+            </div>
         </div>
-
-
-        {{-- Category --}}
-        <div class="mb-3" x-data="{
-                value: 1,
-                options : [
-                    @foreach ($categories as $item )
-                    { value: {{ $item->id }}, label: '{{ $item->name }}' },
-                    @endforeach
-                ],
-                init() {
-                    let choices = new Choices(this.$refs.select)
-
-                    let refreshChoices = () => {
-                        choices.clearStore()
-                        choices.setChoices(this.options.map(({value, label}) => ({
-                            value,
-                            label,
-                            selected: this.value === value
-                        })))
-                    }
-                    refreshChoices()
-
-                    this.$refs.select.addEventListener('change', () => {
-                        this.value = choices.getValue(true)
-                    })
-
-                    this.$watch('value', () => refreshChoices())
-                    this.$watch('options', () => refreshChoices())
-                }
-            }">
-            <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
-
-            <select x-ref="select" id="category"></select>
-        </div>
-
-        {{ $brand_id }}
-
     </div>
 </div>
