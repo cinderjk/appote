@@ -3,7 +3,7 @@
     <nav class="flex mb-4" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-3 rtl:space-x-reverse">
             <li class="inline-flex items-center">
-                <a href="{{ route('dashboard') }}"
+                <a href="{{ route('dashboard') }}" wire:navigate
                     class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
                     <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor" viewBox="0 0 20 20">
@@ -14,7 +14,7 @@
                 </a>
             </li>
             <li class="inline-flex items-center">
-                <a href="{{ route('product') }}"
+                <a href="{{ route('product') }}" wire:navigate
                     class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white ">
                     <svg class="w-3 h-3 text-gray-400 mx-1 rtl:rotate-180" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
@@ -127,28 +127,60 @@
                 placeholder="Nama Produk">
         </div>
 
+
+
+        {{-- Price --}}
+        <div class="mb-3">
+            <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga</label>
+            <input wire:model="price" type="text" id="price"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Harga">
+        </div>
+
+        {{-- Sale Price --}}
+        <div x-data="{ open: false }">
+            <button x-on:click="open = ! open" type="button"
+                class="text-xs text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Punya
+                harga promo?</button>
+
+            <div x-show="open">
+                {{-- Price --}}
+                <div class="mb-3">
+                    <label for="sale_price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga
+                        Promo</label>
+                    <input wire:model="sale_price" type="text" id="sale_price"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Harga Promo">
+                </div>
+            </div>
+        </div>
+
         {{-- Description --}}
         <div class="mb-3">
 
-            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi</label>
+            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi
+                (opsional)</label>
             <textarea id="message" rows="4"
                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Deskripsi singkat produk"></textarea>
 
         </div>
 
+
         {{-- Image --}}
         <div class="mb-3">
-            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload
-                file</label>
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Unggah
+                Foto (opsional)</label>
             <input
                 class="block w-full text-sm text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                 aria-describedby="file_input_help" id="file_input" type="file">
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX.
-                800x400px).</p>
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG atau JPEG.</p>
         </div>
 
-        <button wire:click="create" type="submit"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium  text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Buat</button>
+        <div class="mb-3">
+            <button wire:click="create" type="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium  text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Buat Produk
+            </button>
+        </div>
     </div>
 </div>
