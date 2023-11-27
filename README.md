@@ -6,19 +6,27 @@ Appote adalah aplikasi POS (Point of Sales) apotek yang masih dalam tahap pengem
 
 ### Fitur
 
--   [x] Autentikasi
+-   [v] Autentikasi
 -   [x] Dasbor
 -   [x] Manajemen Pengguna
 -   [x] Transaksi
 -   [x] Produk
+    -   [x] Buat Produk
+    -   [x] List Produk
+    -   [x] Merek
+    -   [x] Kategori
 -   [x] Pelanggan
 -   [x] Laporan
 
 ### Teknologi
 
--   [x] Laravel 10
--   [x] Livewire 3
--   [x] Tailwind CSS 2
--   [x] Alpine JS 3
+-   [v] Laravel 10
+-   [v] Livewire 3
+-   [v] Tailwind CSS 3 (Flowbite)
+-   [v] Alpine JS 3
+
+## Lisensi
+
+Aplikasi ini dirilis dengan lisensi MIT. Anda bebas menggunakan, memodifikasi, dan mendistribusikan aplikasi ini.
 
 Jika aplikasi ini bermanfaat, silahkan berikan ⭐️ di repository ini.
