@@ -44,7 +44,7 @@
     </h2>
     <div class=" rounded-lg dark:border-gray-700">
         {{-- Brand --}}
-        <div class="mb-3" x-data="{
+        <div wire:ignore class="mb-3" x-data="{
                 value: 1,
                 options : [
                     @foreach ($brands as $item )
@@ -66,6 +66,7 @@
 
                     this.$refs.select.addEventListener('change', () => {
                         this.value = choices.getValue(true)
+                        @this.set('brand_id', this.value)
                     })
 
                     this.$watch('value', () => refreshChoices())
@@ -79,7 +80,7 @@
 
 
         {{-- Category --}}
-        <div class="mb-3" x-data="{
+        <div wire:ignore class="mb-3" x-data="{
                 value: 1,
                 options : [
                     @foreach ($categories as $item )
@@ -101,6 +102,7 @@
 
                     this.$refs.select.addEventListener('change', () => {
                         this.value = choices.getValue(true)
+                        @this.set('category_id', this.value)
                     })
 
                     this.$watch('value', () => refreshChoices())
@@ -112,7 +114,30 @@
             <select x-ref="select" id="category"></select>
         </div>
 
+        {{-- Name --}}
+        <div wire:ignore class="mb-3" x-data="{
+            name : '',
+            slug : '',
+            init() {
+                this.$watch('name', (value) => {
+                    this.slug = encodeURIComponent(value.toLowerCase().replace(/ /g, '-'))
+                })
+            }
+        }">
+            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
+            <input wire:model="name" type="text" id="name"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Nama Produk" x-model="name">
+
+            {{-- <span x-text="name"></span> --}}
+            <span x-text="slug"></span>
+
+        </div>
+
+
         {{ $brand_id }}
+        {{ $category_id }}
+        {{ $name }}
 
     </div>
 </div>

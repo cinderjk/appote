@@ -11,7 +11,7 @@ class CreateProduct extends Component
 {
     public $title = 'Buat Produk';
     public $brand_id = 1;
-    public $category_id;
+    public $category_id = 1;
     public $name;
     public $slug;
     public $description;
@@ -32,9 +32,26 @@ class CreateProduct extends Component
         'sale_price' => 'nullable|numeric|min:0',
     ];
 
-    public function mount()
+    public function create()
     {
-        //
+        $this->validate();
+
+        $image = $this->image->store('public/products');
+
+        Product::create([
+            'brand_id' => $this->brand_id,
+            'category_id' => $this->category_id,
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'description' => $this->description,
+            'image' => $image,
+            'price' => $this->price,
+            'sale_price' => $this->sale_price,
+        ]);
+
+        session()->flash('success', 'Produk berhasil ditambahkan.');
+
+        return redirect()->route('products.index');
     }
 
 
