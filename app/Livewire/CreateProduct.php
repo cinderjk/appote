@@ -34,6 +34,7 @@ class CreateProduct extends Component
 
     public function create()
     {
+        dd($this->all());
         $this->validate();
 
         $image = $this->image->store('public/products');
