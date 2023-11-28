@@ -1,5 +1,9 @@
 # APPOTE
 
+<p align="center">
+    <img src="https://raw.githubusercontent.com/cinderjk/appote/main/public/assets/logo.png" alt="Appote Logo" height="175"></img>
+</p>
+
 ## Deskripsi
 
 Appote adalah aplikasi POS (Point of Sales) apotek yang masih dalam tahap pengembangan. Dibuat untuk portofolio saya, [Fahri Pano](https://fahripano.com).
