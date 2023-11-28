@@ -18,6 +18,7 @@ class ProductFactory extends Factory
     {
         $name = $this->faker->unique()->word;
         $slug = Str::slug($name);
+        $image = 'assets/placeholder.jpg';
 
         return [
             'category_id' => rand(1, 10),
@@ -25,7 +26,7 @@ class ProductFactory extends Factory
             'name' => $name,
             'slug' => $slug,
             'description' => $this->faker->paragraph,
-            'image' => $this->faker->imageUrl(),
+            'image' => $image,
             'price' => $this->faker->numberBetween(10000, 100000),
             'sale_price' => $this->faker->numberBetween(10000, 100000),
         ];

@@ -68,7 +68,7 @@ class CreateProduct extends Component
 
         Storage::put('public/products/' . $this->image->getClientOriginalName(), $this->image->get());
 
-        return 'products/' . $this->image->getClientOriginalName();
+        return 'storage/products/' . $this->image->getClientOriginalName();
     }
 
     public function render()
