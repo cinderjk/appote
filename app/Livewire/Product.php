@@ -13,7 +13,7 @@ class Product extends Component
     public $q;
     protected $queryString = ['q'];
 
-    public function search()
+    public function updatedQ()
     {
         $this->resetPage();
     }
