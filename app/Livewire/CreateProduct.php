@@ -6,9 +6,13 @@ use Livewire\Component;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Category;
+use Illuminate\Support\Str;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class CreateProduct extends Component
 {
+    use WithFileUploads;
     public $title = 'Buat Produk';
     public $brand_id = 1;
     public $category_id = 1;
@@ -19,25 +23,26 @@ class CreateProduct extends Component
     public $price;
     public $sale_price;
 
-    
-
     protected $rules = [
         'brand_id' => 'required|exists:brands,id',
         'category_id' => 'required|exists:categories,id',
         'name' => 'required|min:3|max:255',
         'slug' => 'required|min:3|max:255|unique:products,slug',
-        'description' => 'nullable|min:3|max:255',
-        'image' => 'nullable|image|max:1024',
+        'description' => 'nullable',
         'price' => 'required|numeric|min:0',
-        'sale_price' => 'nullable|numeric|min:0',
+        'sale_price' => 'nullable|numeric',
     ];
 
     public function create()
     {
-        dd($this->all());
+        $this->price = fixCurrency($this->price);
+        $this->sale_price = fixCurrency($this->sale_price);
+        $this->slug = Str::slug($this->name);
         $this->validate();
-
-        $image = $this->image->store('public/products');
+        $image = '';
+        if($this->image) {
+            $image = $this->uploadImage();
+        }
 
         Product::create([
             'brand_id' => $this->brand_id,
@@ -52,9 +57,19 @@ class CreateProduct extends Component
 
         session()->flash('success', 'Produk berhasil ditambahkan.');
 
-        return redirect()->route('products.index');
+        return to_route('product');
     }
 
+    public function uploadImage()
+    {
+        $this->validate([
+            'image' => 'nullable|image',
+        ]);    
+
+        Storage::put('public/products/' . $this->image->getClientOriginalName(), $this->image->get());
+
+        return 'products/' . $this->image->getClientOriginalName();
+    }
 
     public function render()
     {

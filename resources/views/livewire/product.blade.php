@@ -76,7 +76,7 @@
                             {{ $item->name }}
                         </th>
                         <td class="px-6 py-4">
-                            <img src="{{ $item->image }}" alt="image-{{ $item->name }}" class="w-5">
+                            <img src="{{ 'storage/' . $item->image }}" alt="image-{{ $item->name }}" class="w-5">
                         </td>
                         <td class="px-6 py-4">
                             {{ $item->category->name }}
@@ -89,7 +89,8 @@
                         </td>
                         <td class="px-6 py-4 text-right">
                             <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            <a href="#" class="font-medium ms-2 text-red-600 dark:text-red-500 hover:underline">Hapus</a>
+                            <a href="#"
+                                class="font-medium ms-2 text-red-600 dark:text-red-500 hover:underline">Hapus</a>
                         </td>
                     </tr>
                     @endforeach
