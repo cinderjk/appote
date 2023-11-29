@@ -105,7 +105,7 @@
                                 {{ number_format($item->price, 0, ',', '.') }}
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <a href="#"
+                                <a href="{{ route('product.edit', ['id' => $item->id]) }}" wire:navigate
                                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                 <button x-on:click="open = true; id = {{ $item->id }}; name = '{{ $item->name }}'"
                                     type="button"
@@ -131,13 +131,14 @@
             <div x-show="open" x-transition x-on:click="open = false"
                 class="relative flex min-h-screen items-center justify-center p-4">
                 <div x-on:click.stop x-trap.noscroll.inert="open"
-                    class="relative w-full max-w-lg overflow-y-auto bg-white p-12 shadow-lg">
+                    class="relative w-full max-w-lg overflow-y-auto bg-white dark:bg-gray-800 p-12 shadow-lg">
                     {{-- Title --}}
                     <h2 class="text-xl font-extrabold leading-none tracking-tight text-gray-700 md:text-2xl dark:text-white"
                         :id="$id('modal-title')">Konfirmasi</h2>
 
                     {{-- Content --}}
-                    <p class="mt-2 text-gray-600">Apakah kamu yakin ingin menghapus "<span x-text="name"></span>"?</p>
+                    <p class="mt-2 text-gray-600 dark:text-gray-300">Apakah kamu yakin ingin menghapus "<span
+                            x-text="name"></span>"?</p>
 
                     {{-- Buttons --}}
                     <div class="mt-8 flex space-x-2">

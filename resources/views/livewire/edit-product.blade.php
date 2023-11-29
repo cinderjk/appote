@@ -42,11 +42,11 @@
     <h2 class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-700 md:text-4xl dark:text-white">
         {{ $title }}
     </h2>
-    <div class="  dark:border-gray-700">
+    <form wire:submit="save" class="dark:border-gray-700">
         <div class="lg:flex lg:justify-content:space-between lg:gap-2">
             {{-- Brand --}}
             <div wire:ignore class="mb-3 lg:w-1/2" x-data="{
-                        value: 1,
+                        value: {{ $brand_id ?? 1 }},
                         options : [
                             @foreach ($brands as $item )
                             { value: {{ $item->id }}, label: '{{ $item->name }}' },
@@ -82,7 +82,7 @@
             </div>
             {{-- Category --}}
             <div wire:ignore class="mb-3 lg:w-1/2" x-data="{
-                        value: 1,
+                        value: {{ $category_id ?? 1 }},
                         options : [
                             @foreach ($categories as $item )
                             { value: {{ $item->id }}, label: '{{ $item->name }}' },
@@ -127,6 +127,10 @@
                 placeholder="Nama Produk">
         </div>
 
+        @error('name')
+        {{ $message }}
+        @enderror
+
 
 
         {{-- Price --}}
@@ -138,7 +142,7 @@
         </div>
 
         {{-- Sale Price --}}
-        <div x-data="{ open: false }">
+        <div x-data="{ open: {{ $has_sale }} ?? false }">
             <button x-on:click="open = ! open" type="button"
                 class="text-xs text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                 Punya harga promo?
@@ -170,7 +174,7 @@
         {{-- Image --}}
         <div class="mb-3">
             <div x-data="{
-                imgsrc: '',
+                imgsrc: '{{ $fullPathImage ?? '' }}',
                 init() {
                     this.$refs.image.addEventListener('change', () => {
                         const file = this.$refs.image.files[0]
@@ -198,10 +202,10 @@
         </div>
 
         <div class="mb-3">
-            <button wire:click="create" type="submit"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium  text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Buat
-                Produk
+            <button wire:click="save" type="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium  text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                Edit Produk
             </button>
         </div>
-    </div>
+    </form>
 </div>
