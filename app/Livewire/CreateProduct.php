@@ -39,7 +39,7 @@ class CreateProduct extends Component
         $this->sale_price = fixCurrency($this->sale_price);
         $this->slug = Str::slug($this->name);
         $this->validate();
-        $image = '';
+        $image = Product::$defaultImage;
         if($this->image) {
             $image = $this->uploadImage();
         }

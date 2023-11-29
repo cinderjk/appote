@@ -9,6 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public static $defaultImage = 'assets/placeholder.jpg';
 
     public function brand()
     {

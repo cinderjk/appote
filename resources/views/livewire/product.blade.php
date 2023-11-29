@@ -27,6 +27,7 @@
             </li>
         </ol>
     </nav>
+
     <div class="flex justify-between">
 
         <h2 class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-700 md:text-4xl dark:text-white">
@@ -42,8 +43,7 @@
     </div>
 
     <div class="mb-3">
-        <label for="default-search"
-            class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Cari</label>
         <div class="relative">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -58,63 +58,100 @@
         </div>
     </div>
 
-    <div class="border-2 border-gray-200  dark:border-gray-700">
+    <div x-data="{ open: false, id: null, name: 'default' }">
+        <div class="border-2 border-gray-200  dark:border-gray-700">
+            <div class="relative overflow-x-auto sm:">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Nama
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Gambar
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Merek
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Kategori
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Harga (Rp)
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                <span class="sr-only">Edit</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($products as $item)
+                        <tr
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $item->name }}
+                            </th>
+                            <td class="px-6 py-4">
+                                <img src="{{ $item->image }}" alt="image-{{ $item->name }}" class="w-5">
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $item->brand->name }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $item->category->name }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ number_format($item->price, 0, ',', '.') }}
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="#"
+                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                <button x-on:click="open = true; id = {{ $item->id }}; name = '{{ $item->name }}'"
+                                    type="button"
+                                    class="font-medium ms-2 text-red-600 dark:text-red-500 hover:underline">Hapus</button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
 
-        <div class="relative overflow-x-auto sm:">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Nama
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Gambar
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Kategori
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Merek
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Harga (Rp)
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">Edit</span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($products as $item)
-                    <tr
-                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $item->name }}
-                        </th>
-                        <td class="px-6 py-4">
-                            <img src="{{ $item->image }}" alt="image-{{ $item->name }}" class="w-5">
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $item->category->name }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $item->brand->name }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ number_format($item->price, 0, ',', '.') }}
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            <a href="#"
-                                class="font-medium ms-2 text-red-600 dark:text-red-500 hover:underline">Hapus</a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
-            {{$products->links()}}
+                {{$products->links()}}
+            </div>
         </div>
 
+        {{-- Modal --}}
+        <div x-show="open" style="display: none" x-on:keydown.escape.prevent.stop="open = false" role="dialog"
+            aria-modal="true" x-id="['modal-title']" :aria-labelledby="$id('modal-title')"
+            class="fixed inset-0 z-50 overflow-y-auto">
+            {{-- Overlay --}}
+            <div x-show="open" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
+
+            {{-- Panel --}}
+            <div x-show="open" x-transition x-on:click="open = false"
+                class="relative flex min-h-screen items-center justify-center p-4">
+                <div x-on:click.stop x-trap.noscroll.inert="open"
+                    class="relative w-full max-w-lg overflow-y-auto bg-white p-12 shadow-lg">
+                    {{-- Title --}}
+                    <h2 class="text-xl font-extrabold leading-none tracking-tight text-gray-700 md:text-2xl dark:text-white"
+                        :id="$id('modal-title')">Konfirmasi</h2>
+
+                    {{-- Content --}}
+                    <p class="mt-2 text-gray-600">Apakah kamu yakin ingin menghapus "<span x-text="name"></span>"?</p>
+
+                    {{-- Buttons --}}
+                    <div class="mt-8 flex space-x-2">
+                        <button type="button" x-on:click="$wire.deleteById(id); open = false"
+                            class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Ya, Hapus
+                        </button>
+                        <button type="button" x-on:click="open = false"
+                            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                            Batalkan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -18,6 +18,13 @@ class Product extends Component
         $this->resetPage();
     }
 
+    public function deleteById($id) 
+    {
+        $product = ProductModel::find($id);
+        $product->delete();
+        session()->flash('message', 'Produk berhasil dihapus');    
+    }
+
     public function render()
     {
         $products = ProductModel::latest()->with(['category', 'brand'])->where('name', 'like', '%'.$this->q.'%')->paginate(8);
