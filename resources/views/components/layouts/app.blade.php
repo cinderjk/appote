@@ -5,8 +5,24 @@
         // On page load or when changing themes, best to add inline in `head` to avoid FOUC
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
+            loadDarkStylesheet();
         } else {
-            document.documentElement.classList.remove('dark')
+            document.documentElement.classList.remove('dark');
+            loadLightStylesheet();
+        }
+
+        function loadDarkStylesheet() {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = '{{ asset("assets/css/choices-dark.min.css") }}';
+            document.head.appendChild(link);
+        }
+
+        function loadLightStylesheet() {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = '{{ asset("assets/css/choices.min.css") }}';
+            document.head.appendChild(link);
         }
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,7 +32,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
     {{--
     <link rel="stylesheet" href="{{ asset('build/assets/app-d595991b.css') }}"> --}}
     @livewireStyles
@@ -125,8 +140,6 @@
                     </a>
                 </li>
             </ul>
-
-
         </div>
     </aside>
 
@@ -151,6 +164,7 @@
 
 
     <script>
+        // Drawer
         // get openDrawer button by id
         var openDrawer = document.getElementById('openDrawer');
         // on click, console log
@@ -160,7 +174,12 @@
             // show sidebar
             sidebar.classList.remove('-translate-x-full');
         });
+        // End of Drawer
 
+
+
+
+        // Dark Mode Toggle
         var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
@@ -199,8 +218,11 @@
                     localStorage.setItem('color-theme', 'dark');
                 }
             }
-            
+
+            // refresh page to make sure all styles are loaded
+            window.location.reload();
         });
+        // End of Dark Mode Toggle
     </script>
 
     {{-- <script src="{{ asset('build/assets/app-4a3c839c.js') }}"></script> --}}
