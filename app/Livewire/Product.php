@@ -22,7 +22,7 @@ class Product extends Component
     {
         $product = ProductModel::find($id);
         $product->delete();
-        session()->flash('message', 'Produk berhasil dihapus');    
+        $this->notify('success', 'Berhasil', 'Data berhasil dihapus!'); 
     }
 
     public function render()

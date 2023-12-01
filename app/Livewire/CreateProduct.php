@@ -55,7 +55,7 @@ class CreateProduct extends Component
             'sale_price' => $this->sale_price,
         ]);
 
-        session()->flash('success', 'Produk berhasil ditambahkan.');
+        $this->notify('success', 'Berhasil', 'Data berhasil dibuat!');     
 
         return to_route('product');
     }

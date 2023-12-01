@@ -160,6 +160,8 @@
                     fill-rule="evenodd" clip-rule="evenodd"></path>
             </svg>
         </button>
+
+        <x-notification />
     </div>
 
 
@@ -223,7 +225,12 @@
             window.location.reload();
         });
         // End of Dark Mode Toggle
+
+
     </script>
+
+
+
 
     {{-- <script src="{{ asset('build/assets/app-4a3c839c.js') }}"></script> --}}
     {{-- @livewireScripts --}}
