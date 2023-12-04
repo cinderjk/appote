@@ -24,4 +24,12 @@ class Product extends Model
             'name' => 'Uncategorized',
         ]);
     }
+
+    public function getFinalPrice(){
+        if($this->sale_price > 0){
+            return $this->sale_price;
+        }else{
+            return $this->price;
+        }
+    }
 }

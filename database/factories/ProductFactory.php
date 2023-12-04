@@ -27,8 +27,8 @@ class ProductFactory extends Factory
             'slug' => $slug,
             'description' => $this->faker->paragraph,
             'image' => $image,
-            'price' => $this->faker->numberBetween(10000, 100000),
-            'sale_price' => $this->faker->numberBetween(10000, 100000),
+            'price' => $this->faker->numberBetween(20000, 30000),
+            'sale_price' => $this->faker->numberBetween(5000, 19999),
         ];
     }
 }

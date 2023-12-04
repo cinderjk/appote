@@ -102,7 +102,7 @@
                                 {{ $item->category->name }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ number_format($item->price, 0, ',', '.') }}
+                                {{ number_format($item->getFinalPrice(), 0, ',', '.') }}
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <a href="{{ route('product.edit', ['id' => $item->id]) }}" wire:navigate
