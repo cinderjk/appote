@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Product as ProductModel;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Storage;
 class Product extends Component
 {
     use WithPagination;
@@ -21,8 +22,16 @@ class Product extends Component
     public function deleteById($id) 
     {
         $product = ProductModel::find($id);
-        $product->delete();
-        $this->notify('success', 'Berhasil', 'Data berhasil dihapus!'); 
+        if($product){
+            if($product->image != ProductModel::$defaultImage) {
+                Storage::delete('public/products/' . $product->image);
+                dd('ok');
+            }
+            $product->delete();
+            $this->notify('success', 'Berhasil', 'Data berhasil dihapus!'); 
+        } else {
+            $this->notify('error', 'Gagal', 'Data gagal dihapus!'); 
+        }
     }
 
     public function render()

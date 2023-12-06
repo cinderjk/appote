@@ -18,15 +18,14 @@ class ProductFactory extends Factory
     {
         $name = $this->faker->unique()->word;
         $slug = Str::slug($name);
-        $image = 'assets/placeholder.jpg';
 
         return [
             'category_id' => rand(1, 10),
             'brand_id' => rand(1, 10),
+            'media_id' => 1,
             'name' => $name,
             'slug' => $slug,
             'description' => $this->faker->paragraph,
-            'image' => $image,
             'price' => $this->faker->numberBetween(20000, 30000),
             'sale_price' => $this->faker->numberBetween(5000, 19999),
         ];

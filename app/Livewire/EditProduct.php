@@ -57,7 +57,7 @@ class EditProduct extends Component
     public function save()
     {
         $this->price = fixCurrency($this->price);
-        $this->sale_price = fixCurrency($this->sale_price);
+        $this->sale_price = fixCurrency($this->sale_price ?? '');
         $this->validate();
         $this->slug = Str::slug($this->name);
         $this->validate([
